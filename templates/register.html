@@ -19,10 +19,10 @@
 <body>
     <nav>
         <ul class="navlist">
-              <li><a href="/" class="home-link"><i class='bx bx-home-circle'></i></a></li>
-  
-          </ul>
-      </nav>
+            <li><a href="/" class="home-link"><i class='bx bx-home-circle'></i></a></li>
+
+        </ul>
+    </nav>
     <div class="flip-container">
         <div class="flipper flip" id="flipper">
             <div class="front">
@@ -46,9 +46,18 @@
                 </form>
                 <a class="flipbutton" id="registerButton" href="#">Login to my account <i
                         class='bx bxs-door-open'></i></a>
+                <div class="auth">
+                    <button class="auth-button" id="google-register">Register with Google</button>
+                    <button class="auth-button" id="github-register">Register with GitHub</button>
+                </div>
             </div>
         </div>
     </div>
+    <script>
+        // document.getElementById('google-register').addEventListener('click', function () {
+        //     window.location.href = '/auth/google'
+        // })
+    </script>
 </body>
 
 </html>

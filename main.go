@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"forum/database"
-	"forum/handlers"
+	"forumUpdated/database"
+	"forumUpdated/handlers"
 
 	"log"
 	"net/http"
@@ -61,9 +61,13 @@ func main() {
 	http.HandleFunc("/filter", func(w http.ResponseWriter, r *http.Request) {
 		handlers.FilterPosts(w, r, db)
 	})
+	http.HandleFunc("/auth/google/login", handlers.HsandleGoogleLogin)
+	http.HandleFunc("/auth/google/callback", func(w http.ResponseWriter, r *http.Request) {
+		handlers.HandleGoogleCallback(db, w, r)
+	})
 
-	fmt.Println("server started on http://localhost:1216")
-	http.ListenAndServe(":1216", nil)
+	fmt.Println("server started on http://localhost:1219")
+	http.ListenAndServe(":1219", nil)
 
 	// You can now use the 'db' connection to perform database operations.
 

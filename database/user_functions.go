@@ -65,7 +65,7 @@ func GetUserByID(db *sql.DB, userID int) (User, error) {
 
 func GetUserByEmail(db *sql.DB, email string) (User, error) {
 	var user User
-	err := db.QueryRow(`SELECT id, email, password, registration_date FROM users WHERE email = ?`, email).Scan(&user.ID, &user.Email, &user.Username, &user.RegistrationDate)
+	err := db.QueryRow(`SELECT id, email, password, registration_date FROM users WHERE email = ?`, email).Scan(&user.ID, &user.Email, &user.Password, &user.RegistrationDate)
 	if err != nil {
 		return User{}, err
 	}

@@ -113,7 +113,7 @@ input[type="submit"]:hover {
 .flipbutton {
   color: #03045e;
   text-decoration: none;
-  text-align: left !important;
+  text-align: center;
 }
 
 
@@ -193,4 +193,17 @@ nav {
 
 .navlist a.active {
   color: var(--main-color);
+}
+
+.auth {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: 20px;
+
+}
+.front a,
+.back a {
+  margin-left: 70px;
 }

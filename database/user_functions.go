@@ -4,9 +4,12 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"strings"
 
 	auth "forum/middleware"
 	"time"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 func RegisterUser(db *sql.DB, username, email, password string) (int64, error) {
@@ -387,4 +390,28 @@ func GetPostsByCategory(db *sql.DB, category string, userID int, createdByMe, li
 	}
 
 	return posts, nil
+}
+
+func CreateUser(db *sql.DB, email string) (User, error) {
+	// Hash and salt a default password
+	username := strings.Split(email, "@")[0]
+	defaultPassword := "default"
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(defaultPassword), bcrypt.DefaultCost)
+	if err != nil {
+		return User{}, err
+	}
+
+	// Insert the new user into the database
+	_, err = db.Exec("INSERT INTO users (username, email, password, registration_date) VALUES (?, ?, ?,?)", username, email, string(hashedPassword), time.Now().Format("2006-01-02 15:04:05"))
+	if err != nil {
+		return User{}, err
+	}
+
+	// Retrieve the newly created user
+	user, err := GetUserByEmail(db, email)
+	if err != nil {
+		return User{}, err
+	}
+
+	return user, nil
 }

@@ -1,13 +1,16 @@
 package database
 
-import "time"
+import (
+	"database/sql"
+	"time"
+)
 
 type User struct {
 	ID               int
 	Username         string
 	Email            string
 	Password         string
-	RegistrationDate string
+	RegistrationDate sql.NullString
 }
 
 type Post struct {

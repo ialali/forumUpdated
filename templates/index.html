@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&family=Poppins:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/mainpage.css">
+    <script src="/static/script.js"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,200,0,0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Forum - Main Page</title>
+</head>
+
+<body>
+    <nav>
+        <img class="logo" src="/static/images/logo.png" alt="" width="400">
+        <section class="filter-options">
+            <form action="/filter" method="GET">
+                <label for="category"></label>
+                <select name="category" id="category">
+                    <option value="" selected disabled>Categories</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Nutrition">Nutrition</option>
+                    <option value="Recovery">Recovery</option>
+                    <option value="Tech">Tech</option>
+                    <!-- Add options for all available categories -->
+                </select>
+                <label for="created">Created by Me:</label>
+                <input type="checkbox" name="created" id="created" value="true">
+                <label for="liked">Liked by Me:</label>
+                <input type="checkbox" name="liked" id="liked" value="true">
+                <button type="submit">Apply Filter</button>
+            </form>
+        </section>
+
+        <ul class="navlist">
+            <li><a href="/" class="home-link"><i class='bx bx-home-circle'></i> Home</a></li>
+
+            {{if .IsAuthenticated}}
+            <li><a href="/create-post" class="create-link"><i class='bx bxs-plus-square'></i> Create Post</a></li>
+            <li><a href="/logout" class="logout-link"><i class='bx bxs-exit'></i> Logout</a></li>
+            {{else}}
+            <li><a href="/login" class="login-link"><i class='bx bxs-door-open'></i></i> Login</a></li>
+            <li><a href="/register" class="register-link"><i class='bx bxs-spreadsheet'></i> Register</a></li>
+            {{end}}
+        </ul>
+    </nav>
+
+
+    <!-----------Welcome Message Design------------>
+    <section class="hero">
+        <h1>Welcome to the Forum {{.Username}} !</h1>
+    </section>
+
+    <!-- Display a list of forum posts here -->
+    <section class="post-container">
+        <h2>Latest Posts</h2>
+        {{range .Posts}}
+        <div class="cardbox-container" data-post-id="{{.ID}}">
+            <!-- Form for like and dislike -->
+            <!-- User posting -->
+            <div class="post-right-column">
+                <!-- ... (unchanged) ... -->
+                <div class="post-header">
+                    <h3>{{.Title}}</h3>
+                    <div class="like-dislike-buttons">
+                        <div class="button-container">
+                            <form method="POST" action="/like-post">
+                                <input type="hidden" name="post_id" value="{{.ID}}">
+                                <input type="hidden" name="action" value="like">
+                                <button type="submit" class="like-button"><i class='bx bxs-heart'></i></button>
+                            </form>
+                            <div class="post-rating-count">{{.LikeCount}}</div>
+                        </div>
+
+                        <div class="button-container">
+                            <form method="POST" action="/dislike-post">
+                                <input type="hidden" name="post_id" value="{{.ID}}">
+                                <input type="hidden" name="action" value="dislike">
+                                <button type="submit" class="dislike-button"><i class='bx bx-heart'></i></button>
+                            </form>
+                            <div class="post-rating-count">{{.DislikeCount}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <p>{{.Content}}</p>
+                </div>
+                <div class="post-author">
+                    <div class="post-author-handle">&#160;&#160;Posted by <span>{{.Username}}</span> {{.CreationDate.Format "2006-01-02 15:04:05"}}
+                    </div>
+                </div>
+
+                <div class="comments-counts">Comments:</div>
+                <!-- Display comments -->
+                {{range .Comments}}
+                <div class="comment-container">
+                    <ul>
+                        <!-- Display comments for this post -->
+                        <div class="speech-bubble">
+                            <p>{{.Content}}</p>
+                            <div class="post-author">
+                                <div class="post-author-handle">&#160;&#160;Comment by <span>{{.Username}}</span>
+                                    {{.CreationDate.Format "2006-01-02 15:04:05"}}</div>
+                            </div>
+                        </div>
+                        <!-- Form for like dislike comments for this post -->
+                        <div class="like-dislike-buttons">
+                            <form method="POST" action="/like-comment">
+                                <input type="hidden" name="comment_id" value="{{.ID}}">
+                                <input type="hidden" name="action" value="like">
+                                <button type="submit" class="clike-button"><i class='bx bxs-heart'></i>
+                                </button>
+                            </form>
+                            <div class="post-rating-count">{{.LikeCount}}</div>
+                            <form method="POST" action="/dislike-comment">
+                                <input type="hidden" name="comment_id" value="{{.ID}}">
+                                <input type="hidden" name="action" value="dislike">
+                                <button type="submit" class="cdislike-button"><i class='bx bx-heart'></i>
+                                </button>
+                            </form>
+                            <div class="post-rating-count">{{.DislikeCount}}</div>
+                        </div>
+                    </ul>
+                </div>
+                {{end}}
+                <!-- Here you can add comment -->
+                <div class="add-comment-form">
+                    <form method="POST" action="/add-comment">
+                        <input type="hidden" name="post_id" value="{{.ID}}">
+                        <input type="text" name="content" placeholder="Add your comment">
+                        <button type="submit"><i class='bx bxs-send'></i></button>
+                    </form>
+                </div>
+                <!-- End of submit comment form -->
+            </div>
+        </div>
+        <!-- End of cardbox-container -->
+        {{end}}
+        </ul>
+    </section>
+    <footer>
+        <!-- ... (your existing footer content) ... -->
+    </footer>
+</body>
+
+</html>

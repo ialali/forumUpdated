@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&family=Poppins:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/login.css">
+    <script src="/static/script.js"></script>
+</head>
+
+<body>
+    <nav>
+        <ul class="navlist">
+            <li><a href="/" class="home-link"><i class='bx bx-home-circle'></i></a></li>
+
+        </ul>
+    </nav>
+
+    <div class="flip-container">
+        <div class="flipper" id="flipper">
+            <div class="front">
+                <h1 class="title">Login</h1>
+                <form action="/loginauth" method="POST">
+                    <input type="text" placeholder="Username" name="username" />
+                    <input type="password" placeholder="Password" name="password" />
+                    <input type="submit" value="Login" />
+                </form>
+                <a class="flipbutton" id="loginButton" href="">Create my account <i class='bx bxs-spreadsheet'></i></a>
+            </div>
+
+            <div class="back">
+                <h1 class="title">Register</h1>
+                <form action="/registerauth" method="POST">
+                    <input type="text" placeholder="Username" name="username" id="username" />
+                    <input type="email" placeholder="Email" name="email" id="email" />
+                    <input type="password" placeholder="Password" name="password" id="password" />
+                    <input type="submit" value="Sign up" />
+                </form>
+                <a class="flipbutton" id="registerButton" href="#">Login to my account <i
+                        class='bx bxs-door-open'></i></a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

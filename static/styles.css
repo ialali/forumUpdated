@@ -1,0 +1,542 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --bg-color: #00b4d8;
+    --second-bg-color: #90e0ef;
+    --3d-bg-color: #caf0f8;
+    --text-color: #03045e;
+    --second-color: #0077b6;
+    --main-color: #013a63;
+    --big-font: 5rem;
+    --h2-font: 3rem;
+    --h3-font: 2rem;
+    --p-font: 1.1rem;
+}
+
+nav {
+    background-color: #2a6f97;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid transparent;
+    transition: all 0.45s ease;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 19%;
+}
+
+
+
+
+.navlist {
+    list-style: none;
+    display: flex;
+    margin-right: 20px;
+    margin-top: 20px;
+    padding-left: 45px;
+    width: 50%;
+}
+
+.navlist li {
+    margin-left: 10px;
+    margin-bottom: 20px;
+
+}
+
+.navlist a {
+    align-items: center;
+    color: var(--main-color);
+    font-size: var(--p-font);
+    font-weight: 500;
+    margin: 0 15px;
+    transition: all 0.45s ease;
+    font-family: 'Poppins';
+}
+
+.navlist a:hover {
+    color: white;
+}
+
+.navlist a.active {
+    color: var(--main-color);
+}
+
+.home-link,
+.login-link,
+.logout-link,
+.register-link,
+.create-link {
+    display: flex;
+    align-items: center;
+}
+
+.home-link i,
+.login-link i,
+.logout-link i,
+.create-link i,
+.register-link i {
+    margin-right: 5px;
+}
+
+
+.hero {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    margin-top: 100px;
+    margin-left: 50px;
+    font-size: 3rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.filter-options {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    width: 80%;
+    padding-left: 70px;
+    margin-left: 100px;
+    /* Adjust to the desired height */
+}
+
+select {
+    border: none;
+}
+
+.filter-options form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+
+.filter-options input,
+.filter-options button,
+.filter-options select {
+    margin: 10px;
+    height: 30px;
+}
+
+label[for="created"] {
+    font-size: var(--p-font);
+    font-family: 'Poppins';
+    color: var(--text-color);
+}
+
+label[for="liked"] {
+    font-size: var(--p-font);
+    font-family: 'Poppins';
+}
+
+
+
+.filter-options button {
+    background-image: linear-gradient(-180deg, #37AEE2 0%, #1E96C8 100%);
+    border-radius: .5rem;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    display: flex;
+    font-size: 16px;
+    justify-content: center;
+    padding: 1rem 1.75rem;
+    text-decoration: none;
+    width: 20%;
+    border: 0;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    align-items: center;
+
+}
+
+.filter-options select {
+    background-color: #2a6f97;
+    font-size: var(--p-font);
+    font-family: 'Poppins';
+    color: var(--text-color);
+}
+
+.filter-options button:hover {
+    background-image: linear-gradient(-180deg, #1D95C9 0%, #17759C 100%);
+}
+
+@media (min-width: 768px) {
+    .button-43 {
+        padding: 1rem 2rem;
+    }
+}
+
+.forum-posts {
+    text-align: left;
+    /* Display posts in a column */
+}
+
+/*css for mainpage, showing user's post-cards*/
+
+.mainpage-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /*background-color: #009578;*/
+    padding-bottom: 80px;
+}
+
+
+/*design for user posts*/
+.post-container {
+    /*background-color: rgb(0, 51, 128);*/
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: start;
+    padding-top: 65px;
+    align-items: center;
+    height: auto;
+    /* width:auto ;
+   height: auto;*/
+}
+
+.post-container h2 {
+    font-size: var(--h3-font);
+    font-family: 'Poppins';
+}
+
+.cardbox-container {
+    background-color: var(--second-bg-color);
+
+    border-radius: 6px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    /*box-shadow: 5px 5px 10px 1px #000000;*/
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin: 10px;
+}
+
+.like-button,
+.dislike-button {
+    font-size: var(--h3-font);
+    color: var(--text-color);
+}
+
+.like-button:hover,
+.dislike-button:hover {
+    color: white;
+}
+
+.clike-button,
+.cdislike-button {
+    font-size: var(--p-font);
+    color: var(--text-color);
+}
+
+.clike-button:hover,
+.cdislike-button:hover {
+    color: white;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+}
+
+
+
+.like-dislike-buttons {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.like-dislike-buttons form {
+    margin: 10px;
+    /* Remove default form margin */
+}
+
+.like-dislike-buttons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.comment-container .like-dislike-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.post-left-column-button,
+.post-right-column-button {
+    cursor: pointer;
+    color: #555555;
+}
+
+/*right-side of cardbox-for post detail*/
+.post-right-column .material-icons {
+    font-size: 15px;
+}
+
+.post-left-column:not(.post-left-column-selected)>p.ost-left-column-button:hover {
+    color: #000000;
+}
+
+.post-right-column {
+    flex: 1;
+    padding: 12px;
+}
+
+.post-user-pic {
+    margin: 5px 10px;
+}
+
+.post-pic {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 5px;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+}
+
+.post-header h3 {
+    margin: 5px;
+    font-size: var(--h3-font);
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.post-author {
+    text-align: end;
+}
+
+.post-author-handle {
+    color: rgb(112, 107, 107);
+    margin: 0px 5px 5px 5px;
+    font-size: 14px;
+}
+
+.post-author-handle span {
+    color: #000000;
+    font-weight: bold;
+    font-size: 14px;
+    margin: 10px 5px 5px 5px;
+}
+
+.post-content {
+    line-height: 25px;
+    font-size: 14px;
+    margin: 5px;
+    color: #000000;
+}
+
+.post-content h3,
+.post-content p {
+    text-align: left;
+    font-size: var(--p-font);
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.comments-counts {
+    font-size: var(--p-font);
+    font-family: sans-serif;
+}
+
+/* maybe can delete not using now*/
+/*.post-nav {
+    display: flex;
+    flex-direction: row;*/
+/*
+    justify-content: space-between;*/
+/*flex-wrap: nowrap;
+    justify-content: end;
+    align-items: end;
+    overflow:hidden;
+  }
+  .md-container{
+    align-items: right;
+    margin-right: 10px;
+  }
+  .icon-container{
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 16px;
+    padding: 4px;
+    text-decoration: none;
+  }
+  .post-icons{
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+    vertical-align: middle;
+  }
+  
+  .icon-label{
+    display: inline-block;
+    line-height: 1;
+    margin: 5px;
+    text-transform: capitalize;
+    vertical-align: middle;
+    color: #000000;
+  }
+  maybe use later */
+
+/*for showing comment container*/
+.post-right-column>.comment-container {
+    border-style: double;
+    border: lightblue;
+}
+
+.speech-bubble {
+    width: auto;
+    border: 0.5px solid #b8b7b7;
+    padding-left: 5px;
+    border-radius: 5px;
+    margin: 5px;
+    background-color: var(--3d-bg-color);
+}
+
+.speech-bubble p {
+    font-size: var(--p-font);
+    font-family: sans-serif;
+    padding-left: 20px;
+    padding-top: 10px;
+
+}
+
+/*end of showing comment container*/
+
+
+/* for adding comment form*/
+.add-comment-form form {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 5px;
+    padding-left: 200px;
+}
+
+.add-comment-form form input {
+    height: 50px;
+    width: 70%;
+    background-color: var(--3d-bg-color);
+    padding-left: 250px;
+    border-radius: 10px;
+
+}
+
+ input[type="text"]:focus {
+    outline: none;
+}
+
+
+
+
+
+/* CSS */
+.add-comment-form button {
+    background-image: linear-gradient(-180deg, #37AEE2 0%, #1E96C8 100%);
+    border-radius: .5rem;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    display: flex;
+    font-size: 16px;
+    justify-content: center;
+    padding: 1rem 1.75rem;
+    text-decoration: none;
+    width: 10%;
+    border: 0;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin-left: 10px
+}
+
+.add-comment-form button:hover {
+    background-image: linear-gradient(-180deg, #1D95C9 0%, #17759C 100%);
+}
+
+@media (min-width: 768px) {
+    .button-43 {
+        padding: 1rem 2rem;
+    }
+}
+
+
+textarea #comment {
+    display: block;
+}
+
+/* for adding comment form*/
+/*end of user post*/
+
+
+/*back-to-top-bottom start*/
+.push-top {
+    position: absolute;
+}
+
+.back-to-top {
+    position: absolute;
+    width: 150px;
+    height: 30px;
+}
+
+#myBtn {
+    display: none;
+    position: fixed;
+    bottom: 95px;
+    right: 30px;
+    z-index: 99;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background-color: rgb(16, 83, 128);
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 15px;
+    transition: opacity 0.15s;
+}
+
+#myBtn:hover {
+    background-color: rgb(99, 96, 96);
+    color: black;
+    font-weight: bold;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+/*end of back-to-top-bottom & end right-content(user-profile・profile-mini・back-to-top-btn)*/

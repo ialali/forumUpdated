@@ -1,7 +1,6 @@
 package database
 
 import (
-	"database/sql"
 	"time"
 )
 
@@ -10,7 +9,7 @@ type User struct {
 	Username         string
 	Email            string
 	Password         string
-	RegistrationDate sql.NullString
+	RegistrationDate time.Time
 }
 
 type Post struct {

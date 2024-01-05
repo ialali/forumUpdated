@@ -33,6 +33,12 @@
                     <input type="submit" value="Login" />
                 </form>
                 <a class="flipbutton" id="loginButton" href="">Create my account <i class='bx bxs-spreadsheet'></i></a>
+                <div class="auth">
+                    <a href="/auth/google/login" class="auth-button" id="google-register"><i
+                            class='bx bxl-google'></i></a>
+                    <a href="/auth/github/login" class="auth-button" id="github-register"><i
+                            class='bx bxl-github'></i></a>
+                </div>
 
             </div>
 
@@ -47,23 +53,25 @@
                 <a class="flipbutton" id="registerButton" href="#">Login to my account <i
                         class='bx bxs-door-open'></i></a>
                 <div class="auth">
-                    <button class="auth-button" id="google-register">Register with Google</button>
-                    <button class="auth-button" id="github-register">Register with GitHub</button>
+                    <a href="/auth/google/register" class="auth-button" id="google-register"><i
+                            class='bx bxl-google'></i></a>
+                    <a href="/auth/github/register" class="auth-button" id="github-register"><i
+                            class='bx bxl-github'></i></a>
                 </div>
             </div>
         </div>
     </div>
     <script>
-        document.getElementById('google-register').addEventListener('click', function() {
+        document.getElementById('google-register').addEventListener('click', function () {
             // Redirect the user to the Google OAuth 2.0 authorization URL
             window.location.href = '/auth/google/login';
         });
-        
-        document.getElementById('github-register').addEventListener('click', function() {
+
+        document.getElementById('github-register').addEventListener('click', function () {
             // Redirect the user to the GitHub OAuth 2.0 authorization URL
             window.location.href = '/auth/github';
         });
-        </script>
+    </script>
 </body>
 
 </html>

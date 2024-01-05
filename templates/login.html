@@ -34,8 +34,10 @@
                 </form>
                 <a class="flipbutton" id="loginButton" href="">Create my account <i class='bx bxs-spreadsheet'></i></a>
                 <div class="auth">
-                    <button class="auth-button" id="google-login">Login with Google</button>
-                    <button class="auth-button" id="github-login">Login with GitHub</button>
+                    <a href="/auth/google/login" class="auth-button" id="google-register"><i
+                            class='bx bxl-google'></i></a>
+                    <a href="/auth/github/login" class="auth-button" id="github-register"><i
+                            class='bx bxl-github'></i></a>
                 </div>
             </div>
 
@@ -50,20 +52,23 @@
                 <a class="flipbutton" id="registerButton" href="#">Login to my account <i
                         class='bx bxs-door-open'></i></a>
                 <div class="auth">
-                    <button class="auth-button" id="google-register">Register with Google</button>
-                    <button class="auth-button" id="github-register">Register with GitHub</button>
+                    <a href="/auth/google/register" class="auth-button" id="google-register"><i
+                            class='bx bxl-google'></i></a>
+                    <a href="/auth/github/register" class="auth-button" id="github-register"><i
+                            class='bx bxl-github'></i></a>
                 </div>
+
             </div>
         </div>
     </div>
-    <script>
+    <!-- <script>
         document.getElementById('google-login').addEventListener('click', function () {
             window.location.href = '/auth/google/login';
         });
         document.getElementById('github-login').addEventListener('click', function () {
             window.location.href = '/auth/github/login';
         });
-    </script>
+    </script> -->
 </body>
 
 </html>

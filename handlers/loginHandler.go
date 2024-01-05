@@ -33,15 +33,15 @@ type GithubEmail struct {
 var (
 	googleOauthConfig = &oauth2.Config{
 		RedirectURL:  "http://localhost:1219/auth/google/callback",
-		ClientID:     "google_client_id", // Replace with your client ID
-		ClientSecret: "google_client_secret", // Replace with your client secret
+		ClientID:     "client_id", // Replace with your client ID
+		ClientSecret: "client_secret", // Replace with your client secret
 		Scopes:       []string{"https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email"},
 		Endpoint:     google.Endpoint,
 	}
 	githubOauthConfig = &oauth2.Config{
 		RedirectURL:  "http://localhost:1219/auth/github/callback",
-		ClientID:     "github_client_id", // Replace with your client ID
-		ClientSecret: "github_client_secret", // Replace with your client secret
+		ClientID:     "client_id", // Replace with your client ID
+		ClientSecret: "client_secret", // Replace with your client secret
 		Scopes:       []string{"user:email"},
 		Endpoint:     github.Endpoint,
 	}

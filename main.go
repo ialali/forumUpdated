@@ -69,6 +69,14 @@ func main() {
 	http.HandleFunc("/auth/github/callback", func(w http.ResponseWriter, r *http.Request) {
 		handlers.HandleGithubCallback(db, w, r)
 	})
+	http.HandleFunc("/auth/google/register", handlers.GoogleRegisterHandler)
+	http.HandleFunc("/auth/google/registerauth", func(w http.ResponseWriter, r *http.Request) {
+		handlers.GoogleCallbackHandler2(db, w, r)
+	})
+	http.HandleFunc("/auth/github/register", handlers.GithubRegisterHandler)
+	http.HandleFunc("/auth/github/registerauth", func(w http.ResponseWriter, r *http.Request) {
+		handlers.GithubCallbackHandler2(db, w, r)
+	})
 
 	fmt.Println("server started on http://localhost:1219")
 	http.ListenAndServe(":1219", nil)

@@ -198,12 +198,20 @@ nav {
 .auth {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-left: auto;
-  margin-right: 20px;
+  justify-content: center;
+
 
 }
 .front a,
 .back a {
   margin-left: 70px;
+}
+.auth a {
+  color: var(--main-color);
+  font-size: var(--h2-font);
+  font-weight: 500;
+  margin: 0 15px;
+  transition: all 0.45s ease;
+  font-family: 'Poppins';
+  text-decoration: none;
 }

@@ -84,9 +84,9 @@ func GetIDBYusername(db *sql.DB, username string) (int, error) {
 }
 
 // CreatePost inserts a new post into the database and returns the post ID.
-func InsertPost(db *sql.DB, category, title, content string, userID int) error {
+func InsertPost(db *sql.DB, category, title, content string, imagePath sql.NullString, userID int) error {
 	// Prepare the SQL statement to insert a new post.
-	stmt, err := db.Prepare("INSERT INTO posts (user_id, title, content, category, created_at) VALUES (?, ?, ?, ?, ?)")
+	stmt, err := db.Prepare("INSERT INTO posts (user_id, title, content, category, created_at, image_path) VALUES (?, ?, ?, ?, ?, ?)")
 	if err != nil {
 		return err
 	}
@@ -95,8 +95,12 @@ func InsertPost(db *sql.DB, category, title, content string, userID int) error {
 	// Get the current timestamp.
 	createdAt := time.Now().Format("2006-01-02 15:04:05")
 
-	// Execute the SQL statement to insert the new post.
-	_, err = stmt.Exec(userID, title, content, category, createdAt)
+	// If imagePath is not valid, insert NULL into the database.
+	if !imagePath.Valid {
+		_, err = stmt.Exec(userID, title, content, category, createdAt, nil)
+	} else {
+		_, err = stmt.Exec(userID, title, content, category, createdAt, imagePath.String)
+	}
 	if err != nil {
 		return err
 	}

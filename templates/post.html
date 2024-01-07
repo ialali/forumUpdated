@@ -23,7 +23,7 @@
         </ul>
     </nav>
     <section class="post-form">
-        <form action="/add-post" method="POST">
+        <form action="/add-post" method="POST" enctype="multipart/form-data">
             <h1>Create Post</h1>
             <select name="category">
                 <option value="" selected disabled>Category</option>
@@ -34,6 +34,7 @@
             </select>
             <input type="text" class="title" placeholder="Title" name="title" />
             <input type="text" class="content" placeholder="Add your thoughts here.." name="content" />
+            <input type="file" name="image" accept="image/jpeg, image/png, image/gif">
             <input type="submit" value="Create new post" />
         </form>
 

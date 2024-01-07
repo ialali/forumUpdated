@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"database/sql"
-	"forum/database"
+	"forumUpdated/database"
 	"log"
 	"net/http"
 	"text/template"
@@ -12,9 +12,11 @@ func ShowPostHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	userData := GetAuthenticatedUserData(db, r)
 	posts, err := database.GetPosts(db)
 	if err != nil {
+
 		http.Error(w, "Failed to fetch posts", http.StatusInternalServerError)
 		return
 	}
+
 
 	for i, post := range posts {
 		comments, err := database.GetCommentsForPost(db, post.ID)

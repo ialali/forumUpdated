@@ -26,6 +26,7 @@ func main() {
 		log.Fatal(err)
 	}
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	http.Handle("/uploads/", http.StripPrefix("/uploads/", http.FileServer(http.Dir("./uploads"))))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		handlers.ShowPostHandler(w, r, db)
 	})

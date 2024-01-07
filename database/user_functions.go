@@ -107,10 +107,10 @@ func InsertPost(db *sql.DB, category, title, content string, userID int) error {
 func GetPosts(db *sql.DB) ([]Post, error) {
 	var posts []Post
 
-	rows, err := db.Query("SELECT posts.id, posts.title, posts.content, posts.category, posts.created_at, users.username FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.id DESC;")
+	rows, err := db.Query("SELECT posts.id, posts.title, posts.content, posts.category, posts.image_path, posts.created_at, users.username FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.id DESC;")
 
 	if err != nil {
-		fmt.Println("error querrying database")
+		fmt.Println("error querying database")
 		return nil, err
 	}
 	defer rows.Close()
@@ -118,8 +118,7 @@ func GetPosts(db *sql.DB) ([]Post, error) {
 	for rows.Next() {
 		var post Post
 
-		if err := rows.Scan(&post.ID, &post.Title, &post.Content, &post.Category, &post.CreationDate, &post.Username); err != nil {
-
+		if err := rows.Scan(&post.ID, &post.Title, &post.Content, &post.Category, &post.ImagePath, &post.CreationDate, &post.Username); err != nil {
 			return nil, err
 		}
 		posts = append(posts, post)

@@ -1,6 +1,7 @@
 package database
 
 import (
+	"database/sql"
 	"time"
 )
 
@@ -23,6 +24,7 @@ type Post struct {
 	DislikeCount int
 	CreationDate time.Time
 	Username     string
+	ImagePath	sql.NullString
 }
 type Comment struct {
 	ID           int

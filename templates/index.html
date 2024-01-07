@@ -74,6 +74,7 @@
                 <!-- ... (unchanged) ... -->
                 <div class="post-header">
                     <h3>{{.Title}}</h3>
+
                     <div class="like-dislike-buttons">
                         <div class="button-container">
                             <form method="POST" action="/like-post">
@@ -96,9 +97,18 @@
                 </div>
                 <div class="post-content">
                     <p>{{.Content}}</p>
+
+                    {{if .ImagePath.Valid}}
+                    <div class="image-container">
+                        <a href="{{.ImagePath.String}}" class="popup-link">
+                            <img src="{{.ImagePath.String}}" alt="Post Image">
+                        </a>
+                    </div>
+                    {{end}}
                 </div>
                 <div class="post-author">
-                    <div class="post-author-handle">&#160;&#160;Posted by <span>{{.Username}}</span> {{.CreationDate.Format "2006-01-02 15:04:05"}}
+                    <div class="post-author-handle">&#160;&#160;Posted by <span>{{.Username}}</span>
+                        {{.CreationDate.Format "2006-01-02 15:04:05"}}
                     </div>
                 </div>
 
@@ -150,9 +160,54 @@
         {{end}}
         </ul>
     </section>
+
     <footer>
         <!-- ... (your existing footer content) ... -->
     </footer>
+    <div id="image-popup">
+        <!-- The close button -->
+        <span class="close">&times;</span>
+        <!-- The image -->
+        <img id="popup-img" style="width:100%">
+    </div>
+    <script>
+        window.onload = function () {
+            var containers = document.getElementsByClassName('image-container');
+
+            for (var i = 0; i < containers.length; i++) {
+                var link = containers[i].getElementsByTagName('a')[0];
+                if (link && link.getAttribute('href') == "") {
+                    containers[i].classList.add('no-image');
+                }
+            }
+        }
+
+        // Get the popup
+        var popup = document.getElementById('image-popup');
+
+        // Get the image and insert it inside the popup
+        var img = document.getElementById('popup-img');
+
+        // Get all the links
+        var links = document.getElementsByClassName('popup-link');
+
+        // Attach the click event to each link
+        for (var i = 0; i < links.length; i++) {
+            links[i].onclick = function (event) {
+                event.preventDefault();
+                popup.style.display = "block";
+                img.src = this.href;
+            }
+        }
+
+        // Get the <span> element that closes the popup
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on <span> (x), close the popup
+        span.onclick = function () {
+            popup.style.display = "none";
+        }
+    </script>
 </body>
 
 </html>

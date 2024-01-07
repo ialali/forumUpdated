@@ -3,8 +3,10 @@ package handlers
 import (
 	"database/sql"
 	"forum/database"
+	"io"
 	"log"
 	"net/http"
+	"os"
 	"text/template"
 )
 
@@ -49,13 +51,47 @@ func AddPostSubmit(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 
 	title := r.FormValue("title")
 	content := r.FormValue("content")
+	err := r.ParseMultipartForm(20 << 20) // limit your max input length!
+	if err != nil {
+		http.Error(w, "The uploaded file is too big. Please choose an image that's less than 20MB in size.", http.StatusBadRequest)
+		return
+	}
+
+	var imagePath sql.NullString
+	file, header, err := r.FormFile("image") // retrieve the file from form data
+	if err == http.ErrMissingFile {
+		imagePath.Valid = false
+	} else if err != nil {
+		http.Error(w, "Error retrieving the file", http.StatusInternalServerError)
+		return
+	} else {
+		defer file.Close()
+
+		// Create a new file in the uploads directory
+		dst, err := os.Create("uploads/" + header.Filename)
+		if err != nil {
+			log.Println("Error creating file:", err)
+			http.Error(w, "Error creating file", http.StatusInternalServerError)
+			return
+		}
+		defer dst.Close()
+		if _, err := io.Copy(dst, file); err != nil {
+			log.Println("Error copying file:", err)
+			http.Error(w, "Error copying file", http.StatusInternalServerError)
+			return
+		}
+
+		// Use the path of the new file as the image path
+		imagePath.String = "./uploads/" + header.Filename
+		imagePath.Valid = true
+	}
 
 	if title == "" || content == "" {
 		http.Error(w, "Missing required fields", http.StatusUnprocessableEntity)
 		return
 	}
 
-	err := database.InsertPost(db, selectedCategory, title, content, userID)
+	err = database.InsertPost(db, selectedCategory, title, content, imagePath, userID)
 	if err != nil {
 		log.Println("Error inserting post:", err)
 		http.Redirect(w, r, "/error/500", http.StatusSeeOther)
@@ -65,7 +101,6 @@ func AddPostSubmit(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	// Redirect the user to the home page after successfully adding the post
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
-
 func contains(arr []string, item string) bool {
 	for _, el := range arr {
 		if el == item {

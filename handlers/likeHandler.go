@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"database/sql"
-	"forum/database"
+	"forumUpdated/database"
 	"net/http"
 	"strconv"
 )

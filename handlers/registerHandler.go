@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	"forum/database"
+	"forumUpdated/database"
 	auth "forum/middleware"
 	"log"
 	"net/http"

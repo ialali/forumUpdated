@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"database/sql"
-	"forum/database"
+	"forumUpdated/database"
 	"log"
 	"net/http"
 	"text/template"

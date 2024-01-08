@@ -51,7 +51,9 @@ func AddPostSubmit(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 
 	title := r.FormValue("title")
 	content := r.FormValue("content")
-	err := r.ParseMultipartForm(20 << 20) // limit your max input length!
+
+	// Check the size of the uploaded file
+	err := r.ParseMultipartForm(20 << 20) // limit your max input length to 20MB
 	if err != nil {
 		http.Error(w, "The uploaded file is too big. Please choose an image that's less than 20MB in size.", http.StatusBadRequest)
 		return
@@ -59,6 +61,12 @@ func AddPostSubmit(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 
 	var imagePath sql.NullString
 	file, header, err := r.FormFile("image") // retrieve the file from form data
+
+	// Check the size of the uploaded file
+	if header.Size > 20<<20 {
+		http.Error(w, "The uploaded file is too big. Please choose an image that's less than 20MB in size.", http.StatusBadRequest)
+		return
+	}
 	if err == http.ErrMissingFile {
 		imagePath.Valid = false
 	} else if err != nil {

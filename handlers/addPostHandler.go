@@ -63,16 +63,20 @@ func AddPostSubmit(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	file, header, err := r.FormFile("image") // retrieve the file from form data
 
 	// Check the size of the uploaded file
-	if header.Size > 20<<20 {
-		http.Error(w, "The uploaded file is too big. Please choose an image that's less than 20MB in size.", http.StatusBadRequest)
-		return
-	}
-	if err == http.ErrMissingFile {
-		imagePath.Valid = false
-	} else if err != nil {
-		http.Error(w, "Error retrieving the file", http.StatusInternalServerError)
-		return
+	if err != nil {
+		if err == http.ErrMissingFile {
+			imagePath.Valid = false
+		} else {
+			http.Error(w, "Error retrieving the file", http.StatusInternalServerError)
+			return
+		}
 	} else {
+		// Check the size of the uploaded file
+		if header.Size > 20<<20 {
+			http.Error(w, "The uploaded file is too big. Please choose an image that's less than 20MB in size.", http.StatusBadRequest)
+			return
+		}
+
 		defer file.Close()
 
 		// Create a new file in the uploads directory
